@@ -21,14 +21,19 @@ public class DownedPin {
         this.numDownedPin = numDownedPin;
     }
 
+    public static DownedPin fromNumber(int number) {
+        validateRange(number);
+        return cachedPin.get(number);
+    }
+
     private static void validateRange(int numDownedPin) {
         if (numDownedPin < MINIMUM_DOWNED_PIN_NUM || numDownedPin > MAXIMUM_DOWNED_PIN_NUM) {
             throw new InvalidDownedPinNumberException();
         }
     }
 
-    public static DownedPin from(int number) {
-        validateRange(number);
-        return cachedPin.get(number);
+    public DownedPin fromPreviousTry(DownedPin downedPin) {
+        validateRange(this.numDownedPin + downedPin.numDownedPin);
+        return fromNumber(downedPin.numDownedPin);
     }
 }
