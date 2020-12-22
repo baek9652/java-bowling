@@ -20,7 +20,7 @@ public class DownedPinTest {
     }
 
     @Test
-    @DisplayName("한 프레임 안에서 2번 째 시도가 정상적이지 않을 때의 검증")
+    @DisplayName("연속되는 시도가 범위를 벗어날 때의 때의 검증")
     void testFrameCondition() {
         DownedPin firstTry = DownedPin.fromNumber(5);
 
