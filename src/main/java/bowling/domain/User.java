@@ -2,7 +2,11 @@ package bowling.domain;
 
 import bowling.bowlingexception.InvalidNameFormatException;
 
+import java.util.regex.Pattern;
+
 public class User {
+
+    private static final String allowedFormat = "[a-zA-Z]{3}";
 
     private final String name;
 
@@ -12,18 +16,8 @@ public class User {
     }
 
     private void validateName(String name) {
-        if (name == null || name.length() != 3 || !hasOnlyLetters(name)) {
+        if (name == null || !Pattern.matches(allowedFormat, name)) {
             throw new InvalidNameFormatException();
         }
-    }
-
-    private boolean hasOnlyLetters(String input) {
-        int numChar = 0;
-
-        for (int i = 0; i < input.length(); i++) {
-            numChar += Character.isLetter(input.indexOf(i)) ? 1 : 0;
-        }
-
-        return numChar == input.length();
     }
 }
